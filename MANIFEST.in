@@ -1,0 +1,3 @@
+include *.rst LICENSE
+recursive-include howru *.py *.json
+recursive-exclude howru tests/*.*
