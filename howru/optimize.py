@@ -1,0 +1,237 @@
+"""
+Class implementing the U value optimization.
+
+"""
+
+import numpy as np
+from scipy.optimize import least_squares
+
+from .compound import read_compounds_from_csv, read_elements_from_csv
+from .reactions import Reactions
+
+__date__ = "2020-07-23"
+__version__ = "0.1"
+
+
+class UOptimizer(object):
+
+    def __init__(self, TM_species, elements_csv, atoms_csv, dimers_csv,
+                 binary_oxides_csv, ternary_oxides_csv):
+
+        self.TM_species
+        self.elements = read_elements_from_csv(elements_csv, TM_species)
+        self.atoms = read_elements_from_csv(atoms_csv, TM_species)
+        self.dimers = read_compounds_from_csv(dimers_csv, TM_species)
+        self.binary_oxides = read_compounds_from_csv(
+            binary_oxides_csv, TM_species)
+        self.ternary_oxides = read_compounds_from_csv(
+            ternary_oxides_csv, TM_species)
+
+        self.U = np.zeros(len(self.TM_species))
+        self.metal_corrections = None
+
+        self.reactions = Reactions(self.elements, self.atoms,
+                                   self.dimers, self.binary_oxides,
+                                   self.ternary_oxides)
+
+        self.errors = {}
+
+    def fit_metal_corrections(self, U):
+        """
+        Fit the metal correction energy term following Jain et al. for all
+        TM species.
+
+        Arguments:
+          U (list): list of U values
+
+        """
+        metal_corrections = {}
+        for M in self.TM_species:
+            M_oxides = [c for c in self.binary_oxides if M in c.composition]
+            if len(M_oxides) == 0:
+                metal_corrections[M] = 0.0
+            else:
+                _, (comp, Ef_expt, Ef_calc
+                    ) = self.reactions.eval_formation_energies(M_oxides, U)
+                num_atoms = np.array([c.num_atoms for c in comp])
+                M_content = np.array([c[M] for c in comp])/num_atoms
+                errors = (Ef_expt - Ef_calc)/num_atoms
+                if len(comp) > 1:
+                    M_content = M_content[:, np.newaxis]
+                    slope, _, _, _ = np.linalg.lstsq(
+                        M_content, errors, rcond=None)
+                    metal_corrections[M] = -slope[0]
+                else:
+                    metal_corrections[M] = -errors[0]/M_content[0]
+        self.metal_corrections = metal_corrections
+
+    def calc_errors(self, reactions, weighted=False):
+        """
+        Calculate reaction energy errors.
+
+        Arguments:
+          reactions (dict): Reaction dictionary returned by
+            reactions.Reactions.get_reactions()
+          weighted (bool): If True, multiply errors by number of reactions
+
+        Returns:
+          np.array([rmse, mae])
+
+        """
+        rmse = 0.0
+        mae = 0.0
+        for r in reactions:
+            dEr_comp, dEr_expt = reactions[r]
+            error = (dEr_expt - dEr_comp)/self.reactions.num_atoms(r)
+            mae += abs(error)
+            rmse += error*error
+        mae /= len(reactions)
+        rmse = np.sqrt(rmse/len(reactions))
+        w = len(reactions) if weighted else 1
+        return np.array([w*rmse, w*mae])
+
+    def print_errors(self):
+        for e in self.errors:
+            print(e + " (RMSE & MAE) : {:7.4f} {:7.4f}".format(
+                *self.errors[e]))
+
+    def eval_energy_errors(self, U, verbose=False,
+                           print_iterations=False,
+                           binary_oxide_reactions=True,
+                           ternary_oxide_reactions=True,
+                           binary_o2_reactions=True,
+                           ternary_o2_reactions=True,
+                           binary_oxide_formations=True,
+                           ternary_oxide_formations=True,
+                           dimer_binding_energies=True,
+                           fname_binary_oxide_reactions=None,
+                           fname_ternary_oxide_reactions=None,
+                           fname_binary_o2_reactions=None,
+                           fname_ternary_o2_reactions=None,
+                           fname_binary_oxide_formations=None,
+                           fname_ternary_oxide_formations=None,
+                           fname_dimer_binding_energies=None,
+                           metal_corrections=None,
+                           metal_corrections_fit=False, weighted=False,
+                           counter=[0]):
+
+        if metal_corrections is not None:
+            self.metal_corrections = metal_corrections
+        if metal_corrections_fit:
+            self.fit_metal_corrections(U)
+
+        self.errors = {}
+        if binary_oxide_reactions:
+            self.reactions.eval_binary_oxide_reactions(
+                U, fname=fname_binary_oxide_reactions)
+            self.errors['Binary oxide reactions'] = (
+                self.calc_errors(self.reactions.binary_oxide_reactions,
+                                 weighted=weighted))
+        if ternary_oxide_reactions:
+            self.reactions.eval_ternary_oxide_reactions(
+                U, fname=fname_ternary_oxide_reactions)
+            self.errors['Ternary oxide reactions'] = (
+                self.calc_errors(self.reactions.ternary_oxide_reactions,
+                                 weighted=weighted))
+        if binary_o2_reactions:
+            self.reactions.eval_binary_o2_reactions(
+                U, fname=fname_binary_o2_reactions)
+            self.errors['Binary O2 reactions'] = (
+                self.calc_errors(self.reactions.binary_o2_reactions,
+                                 weighted=weighted))
+        if ternary_o2_reactions:
+            self.reactions.eval_ternary_o2_reactions(
+                U, fname=fname_ternary_o2_reactions)
+            self.errors['Ternary O2 reactions'] = (
+                self.calc_errors(self.reactions.ternary_o2_reactions,
+                                 weighted=weighted))
+        if binary_oxide_formations:
+            self.reactions.eval_binary_oxide_formations(
+                U, metal_corrections=self.metal_corrections,
+                fname=fname_binary_oxide_formations)
+            self.errors['Binary oxide formation energies'] = (
+                self.calc_errors(self.reactions.binary_oxide_formations,
+                                 weighted=weighted))
+        if ternary_oxide_formations:
+            self.reactions.eval_ternary_oxide_formations(
+                U, metal_corrections=self.metal_corrections,
+                fname=fname_ternary_oxide_formations)
+            self.errors['Ternary oxide formation energies'] = (
+                self.calc_errors(self.reactions.ternary_oxide_formations,
+                                 weighted=weighted))
+        if dimer_binding_energies:
+            self.reactions.eval_dimer_binding_energies(
+                U, metal_corrections=self.metal_corrections,
+                fname=fname_dimer_binding_energies)
+            self.errors['Dimer binding energies'] = (
+                self.calc_errors(self.reactions.dimer_binding_energies,
+                                 weighted=weighted))
+        if verbose:
+            self.print_errors()
+
+        error = 0.0
+        for e in self.errors:
+            # sum of RMSEs
+            error += self.errors[e][0]
+        if print_iterations:
+            counter[0] += 1
+            if self.metal_corrections is not None:
+                print("{:4d} : ".format(counter[0])
+                      + (len(U)*"{:4.2f} ").format(*U)
+                      + (len(U)*"{:4.2f} ").format(
+                          *list(self.metal_corrections.values()))
+                      + ": {}".format(error))
+            else:
+                print("{:4d} : ".format(counter[0])
+                      + (len(U)*"{:4.2f} ").format(*U)
+                      + ": {}".format(error))
+        return error
+
+    def optimize_U(self, U, U_val_max, metal_corrections=None,
+                   metal_corrections_fit=False,
+                   opt_binary_oxide_reactions=False,
+                   opt_ternary_oxide_reactions=False,
+                   opt_binary_o2_reactions=False,
+                   opt_ternary_o2_reactions=False,
+                   opt_binary_oxide_formations=False,
+                   opt_ternary_oxide_formations=False,
+                   opt_dimer_binding_energies=False):
+        """
+        Least squares optimization of the U values.
+
+        """
+
+        if not any(opt_binary_oxide_reactions,
+                   opt_ternary_oxide_reactions,
+                   opt_binary_o2_reactions,
+                   opt_ternary_o2_reactions,
+                   opt_binary_oxide_formations,
+                   opt_ternary_oxide_formations,
+                   opt_dimer_binding_energies):
+            return
+        else:
+            def error_func(U):
+                return self.eval_energy_errors(
+                    U, metal_corrections=metal_corrections,
+                    metal_corrections_fit=metal_corrections_fit,
+                    weighted=False,
+                    binary_oxide_reactions=opt_binary_oxide_reactions,
+                    ternary_oxide_reactions=opt_ternary_oxide_reactions,
+                    binary_o2_reactions=opt_binary_o2_reactions,
+                    ternary_o2_reactions=opt_ternary_o2_reactions,
+                    binary_oxide_formations=opt_binary_oxide_formations,
+                    ternary_oxide_formations=opt_ternary_oxide_formations,
+                    dimer_binding_energies=opt_dimer_binding_energies)
+
+            U_min = np.zeros(len(U))
+            U_max = np.ones(len(U))*U_val_max
+            results = least_squares(error_func, U, bounds=(U_min, U_max),
+                                    ftol=1.0e-3, xtol=1.0e-2)
+            if not results.success:
+                raise ValueError("U fit not converged.")
+
+            U_opt = results.x
+            return U_opt
+
+    def __str__(self):
+        return
