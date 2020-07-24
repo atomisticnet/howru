@@ -3,8 +3,9 @@ Class implementing the U value optimization.
 
 """
 
+import os
 import numpy as np
-from scipy.optimize import minimize
+from scipy.optimize import minimize, least_squares
 
 from .compound import read_compounds_from_csv, read_elements_from_csv
 from .reactions import Reactions
@@ -16,7 +17,7 @@ __version__ = "0.1"
 class UOptimizer(object):
 
     def __init__(self, TM_species, elements_csv, atoms_csv, dimers_csv,
-                 binary_oxides_csv, ternary_oxides_csv):
+                 binary_oxides_csv, ternary_oxides_csv, loocv=False):
 
         self.TM_species = TM_species
         self.elements = read_elements_from_csv(elements_csv, TM_species)
@@ -33,6 +34,39 @@ class UOptimizer(object):
         self.reactions = Reactions(self.elements, self.atoms,
                                    self.dimers, self.binary_oxides,
                                    self.ternary_oxides)
+
+        self.loocv = loocv
+        if loocv:
+            self.reactions_one_out = []
+            self.reactions_one_in = []
+            self.loocv_comp = []
+            self.all_reactions = self.reactions
+            N = len(self.binary_oxides)
+            for i in range(N):
+                idx = [j for j in range(N) if j != i]
+                self.loocv_comp.append(self.binary_oxides[i])
+                self.reactions_one_out.append(
+                    Reactions(self.elements, self.atoms,
+                              self.dimers,
+                              [self.binary_oxides[j] for j in idx],
+                              self.ternary_oxides))
+                self.reactions_one_in.append(
+                    Reactions(self.elements, self.atoms,
+                              self.dimers, self.binary_oxides,
+                              self.ternary_oxides,
+                              required_compounds=[self.loocv_comp[-1]]))
+            N = len(self.ternary_oxides)
+            for i in range(N):
+                idx = [j for j in range(N) if j != i]
+                self.reactions_one_out.append(
+                    Reactions(self.elements, self.atoms,
+                              self.dimers, self.binary_oxides,
+                              [self.ternary_oxides[j] for j in idx]))
+                self.reactions_one_in.append(
+                    Reactions(self.elements, self.atoms,
+                              self.dimers, self.binary_oxides,
+                              self.ternary_oxides,
+                              required_compounds=[self.ternary_oxides[i]]))
 
         self.errors = {}
 
@@ -78,6 +112,8 @@ class UOptimizer(object):
           np.array([rmse, mae])
 
         """
+        if len(reactions) == 0:
+            return np.array([0.0, 0.0])
         rmse = 0.0
         mae = 0.0
         for r in reactions:
@@ -94,6 +130,19 @@ class UOptimizer(object):
         for e in self.errors:
             print((e + " (RMSE & MAE)").ljust(45)
                   + " : {:7.4f} {:7.4f}".format(*self.errors[e]))
+
+    def print_U_values(self, U):
+        print("      " + (len(self.TM_species)*"{:5s} "
+                          ).format(*list(self.TM_species)))
+        print(" U = [" + ", ".join(["{:5.2f}".format(uval).strip()
+                                    for uval in U]) + "]")
+
+    def print_Jain(self, metal_corrections):
+        print("      " + (len(self.TM_species)*"{:5s} "
+                          ).format(*list(self.TM_species)))
+        print(" c = [" + ", ".join(
+            ["{:5.2f}".format(c).strip()
+             for c in metal_corrections.values()]) + "]")
 
     def eval_energy_errors(self, U, verbose=False,
                            print_iterations=False,
@@ -232,13 +281,43 @@ class UOptimizer(object):
                     ternary_oxide_formations=opt_ternary_oxide_formations,
                     dimer_binding_energies=opt_dimer_binding_energies)
 
-            # U_min = np.zeros(len(U))
-            # U_max = np.ones(len(U))*U_val_max
-            # results = least_squares(error_func, U, bounds=(U_min, U_max),
-            #                         ftol=1.0e-3, xtol=1.0e-2)
+            U_min = np.zeros(len(U))
+            U_max = np.ones(len(U))*U_val_max
+            if self.loocv:
+                for i in range(len(self.loocv_comp)):
+                    comp = self.loocv_comp[i].composition
+                    comp = comp.formula.replace(" ", "")
+                    print("\n>>>> LOO-CV Composition: {} <<<<".format(comp))
+                    self.reactions = self.reactions_one_out[i]
+                    results = least_squares(error_func, U,
+                                            bounds=(U_min, U_max),
+                                            ftol=1.0e-3, xtol=1.0e-2)
+                    U_opt = results.x
+                    self.print_U_values(U_opt)
+                    self.reactions = self.reactions_one_in[i]
+                    dirname = "loocv-{}".format(comp)
+                    os.mkdir(dirname)
+                    self.eval_energy_errors(
+                        U_opt, verbose=True,
+                        fname_binary_oxide_reactions=os.path.join(
+                            dirname, "oxide-reactions-2.dat"),
+                        fname_ternary_oxide_reactions=os.path.join(
+                            dirname, "oxide-reactions-3.dat"),
+                        fname_binary_o2_reactions=os.path.join(
+                            dirname, "O2-reactions-2.dat"),
+                        fname_ternary_o2_reactions=os.path.join(
+                            dirname, "O2-reactions-3.dat"),
+                        fname_binary_oxide_formations=os.path.join(
+                            dirname, "formation-energies-2.dat"),
+                        fname_ternary_oxide_formations=os.path.join(
+                            dirname, "formation-energies-3.dat"))
+                self.reactions = self.all_reactions
 
-            U_bound = [(0, U_val_max) for i in range(len(U))]
-            results = minimize(error_func, U, bounds=U_bound, tol=1.0e-3)
+            results = least_squares(error_func, U, bounds=(U_min, U_max),
+                                    ftol=1.0e-3, xtol=1.0e-2)
+
+            # U_bound = [(0, U_val_max) for i in range(len(U))]
+            # results = minimize(error_func, U, bounds=U_bound, tol=1.0e-3)
 
             if not results.success:
                 raise ValueError("U fit not converged.")

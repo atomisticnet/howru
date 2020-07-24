@@ -18,13 +18,14 @@ __version__ = "0.1"
 class Reactions(object):
 
     def __init__(self, elements, atoms, dimers, binary_oxides,
-                 ternary_oxides):
+                 ternary_oxides, required_compounds=None):
 
         self.elements = elements
         self.atoms = atoms
         self.dimers = dimers
         self.binary_oxides = binary_oxides
         self.ternary_oxides = ternary_oxides
+        self.required_compounds = required_compounds
 
         self.binary_oxide_reactions = None
         self.ternary_oxide_reactions = None
@@ -85,6 +86,10 @@ class Reactions(object):
         allowed_prod_comp = [c.composition for c in allowed_products]
         allowed_reac_comp = [c.composition for c in allowed_reactants]
         reactions = {}
+        if required_compounds is None:
+            required_compounds = self.required_compounds
+        elif self.required_compounds is not None:
+            required_compounds += self.required_compounds
         for product in allowed_products:
             reactants = []
             for b in allowed_reactants:

@@ -24,27 +24,21 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                       opt_formation_3, opt_dimer, verbose,
                       U_val_max=10.0, Jain_correction=False,
                       iterative_Jain_fit=False, l2reg=None,
-                      l1o_cv=False):
+                      loocv=False):
 
     if iterative_Jain_fit:
         Jain_correction = True
 
-    print("Initial Jain correction:")
-    print("  " + (len(TM_species)*"{:5s} ").format(*list(TM_species)))
-    print(" [" + ", ".join(["{:5.2f}".format(c).strip()
-                            for c in metal_corrections.values()]) + "]")
-
-    print()
-    print("Initial U values:")
-    print("  " + (len(TM_species)*"{:5s} ").format(*list(TM_species)))
-    print(" [" + ", ".join(["{:5.2f}".format(uval).strip()
-                            for uval in U]) + "]")
-
     optimizer = UOptimizer(TM_species, elements_csv, atoms_csv,
                            dimers_csv, binary_oxides_csv,
-                           ternary_oxides_csv)
+                           ternary_oxides_csv, loocv=loocv)
 
-    U_opt = optimizer.optimize_U(U, U_val_max, print_iterations=True,
+    print("Initial Jain correction:")
+    optimizer.print_Jain(metal_corrections)
+    print("\nInitial U values:")
+    optimizer.print_U_values(U)
+
+    U_opt = optimizer.optimize_U(U, U_val_max, print_iterations=verbose,
                                  metal_corrections=metal_corrections,
                                  metal_corrections_fit=iterative_Jain_fit,
                                  l2reg=l2reg,
@@ -57,11 +51,8 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                                  opt_dimer_binding_energies=opt_dimer)
 
     if any(U_opt != U):
-        print()
-        print("Optimized U values:")
-        print("  " + (len(TM_species)*"{:5s} ").format(*list(TM_species)))
-        print(" [" + ", ".join(["{:5.2f}".format(uval).strip()
-                                for uval in U_opt]) + "]")
+        print("\nOptimized U values:")
+        optimizer.print_U_values(U_opt)
 
     print()
     print("Errors with initial Jain correction:")
@@ -111,7 +102,6 @@ def main():
     with open(args.input_file) as fp:
         options = json.load(fp)
 
-    # E_O2 = options["o2_energy"]
     TM_species = np.array(options["species"])
     metal_corrections = dict(zip(TM_species, options["jain_corrections"]))
 
@@ -140,7 +130,8 @@ def main():
         options["verbose"],
         Jain_correction=options["optimize_jain_correction"],
         iterative_Jain_fit=options["iterative_jain_correction_fit"],
-        l2reg=tryoption("l2_regularization"))
+        l2reg=tryoption("l2_regularization"),
+        loocv=tryoption("leave_one_out_cv"))
 
 
 if (__name__ == "__main__"):
