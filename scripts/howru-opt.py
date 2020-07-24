@@ -23,7 +23,8 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                       opt_o2_2, opt_o2_3, opt_formation_2,
                       opt_formation_3, opt_dimer, verbose,
                       U_val_max=10.0, Jain_correction=False,
-                      iterative_Jain_fit=False, l1o_cv=False):
+                      iterative_Jain_fit=False, l2reg=None,
+                      l1o_cv=False):
 
     if iterative_Jain_fit:
         Jain_correction = True
@@ -43,9 +44,10 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                            dimers_csv, binary_oxides_csv,
                            ternary_oxides_csv)
 
-    U_opt = optimizer.optimize_U(U, U_val_max,
+    U_opt = optimizer.optimize_U(U, U_val_max, print_iterations=True,
                                  metal_corrections=metal_corrections,
                                  metal_corrections_fit=iterative_Jain_fit,
+                                 l2reg=l2reg,
                                  opt_binary_oxide_reactions=opt_oxides_2,
                                  opt_ternary_oxide_reactions=opt_oxides_3,
                                  opt_binary_o2_reactions=opt_o2_2,
@@ -90,7 +92,7 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
             ternary_o2_reactions=False,
             fname_binary_oxide_formations="formation-energies-2-jain.dat",
             fname_ternary_oxide_formations="formation-energies-3-jain.dat",
-            fname_dimer_energies="dimer-energies-jain.dat",
+            fname_dimer_binding_energies="dimer-energies-jain.dat",
             metal_corrections=metal_corrections)
 
 
@@ -113,6 +115,12 @@ def main():
     TM_species = np.array(options["species"])
     metal_corrections = dict(zip(TM_species, options["jain_corrections"]))
 
+    def tryoption(key):
+        if key in options:
+            return options[key]
+        else:
+            return None
+
     optimize_U_values(
         options["u_values"],
         TM_species,
@@ -131,7 +139,8 @@ def main():
         options["optimize_dimer_binding"],
         options["verbose"],
         Jain_correction=options["optimize_jain_correction"],
-        iterative_Jain_fit=options["iterative_jain_correction_fit"])
+        iterative_Jain_fit=options["iterative_jain_correction_fit"],
+        l2reg=tryoption("l2_regularization"))
 
 
 if (__name__ == "__main__"):

@@ -4,7 +4,7 @@ Class implementing the U value optimization.
 """
 
 import numpy as np
-from scipy.optimize import least_squares
+from scipy.optimize import minimize
 
 from .compound import read_compounds_from_csv, read_elements_from_csv
 from .reactions import Reactions
@@ -18,7 +18,7 @@ class UOptimizer(object):
     def __init__(self, TM_species, elements_csv, atoms_csv, dimers_csv,
                  binary_oxides_csv, ternary_oxides_csv):
 
-        self.TM_species
+        self.TM_species = TM_species
         self.elements = read_elements_from_csv(elements_csv, TM_species)
         self.atoms = read_elements_from_csv(atoms_csv, TM_species)
         self.dimers = read_compounds_from_csv(dimers_csv, TM_species)
@@ -92,8 +92,8 @@ class UOptimizer(object):
 
     def print_errors(self):
         for e in self.errors:
-            print(e + " (RMSE & MAE) : {:7.4f} {:7.4f}".format(
-                *self.errors[e]))
+            print((e + " (RMSE & MAE)").ljust(45)
+                  + " : {:7.4f} {:7.4f}".format(*self.errors[e]))
 
     def eval_energy_errors(self, U, verbose=False,
                            print_iterations=False,
@@ -113,7 +113,7 @@ class UOptimizer(object):
                            fname_dimer_binding_energies=None,
                            metal_corrections=None,
                            metal_corrections_fit=False, weighted=False,
-                           counter=[0]):
+                           l2reg=None, counter=[0]):
 
         if metal_corrections is not None:
             self.metal_corrections = metal_corrections
@@ -173,6 +173,13 @@ class UOptimizer(object):
         for e in self.errors:
             # sum of RMSEs
             error += self.errors[e][0]
+
+        if l2reg is not None:
+            norm = np.linalg.norm(U)
+            if metal_corrections is not None:
+                norm += np.linalg.norm(list(metal_corrections.values()))
+            error += l2reg*norm
+
         if print_iterations:
             counter[0] += 1
             if self.metal_corrections is not None:
@@ -189,6 +196,7 @@ class UOptimizer(object):
 
     def optimize_U(self, U, U_val_max, metal_corrections=None,
                    metal_corrections_fit=False,
+                   print_iterations=False, l2reg=None,
                    opt_binary_oxide_reactions=False,
                    opt_ternary_oxide_reactions=False,
                    opt_binary_o2_reactions=False,
@@ -201,20 +209,21 @@ class UOptimizer(object):
 
         """
 
-        if not any(opt_binary_oxide_reactions,
-                   opt_ternary_oxide_reactions,
-                   opt_binary_o2_reactions,
-                   opt_ternary_o2_reactions,
-                   opt_binary_oxide_formations,
-                   opt_ternary_oxide_formations,
-                   opt_dimer_binding_energies):
+        if not any([opt_binary_oxide_reactions,
+                    opt_ternary_oxide_reactions,
+                    opt_binary_o2_reactions,
+                    opt_ternary_o2_reactions,
+                    opt_binary_oxide_formations,
+                    opt_ternary_oxide_formations,
+                    opt_dimer_binding_energies]):
             return
         else:
             def error_func(U):
                 return self.eval_energy_errors(
                     U, metal_corrections=metal_corrections,
                     metal_corrections_fit=metal_corrections_fit,
-                    weighted=False,
+                    weighted=False, print_iterations=print_iterations,
+                    l2reg=l2reg,
                     binary_oxide_reactions=opt_binary_oxide_reactions,
                     ternary_oxide_reactions=opt_ternary_oxide_reactions,
                     binary_o2_reactions=opt_binary_o2_reactions,
@@ -223,10 +232,14 @@ class UOptimizer(object):
                     ternary_oxide_formations=opt_ternary_oxide_formations,
                     dimer_binding_energies=opt_dimer_binding_energies)
 
-            U_min = np.zeros(len(U))
-            U_max = np.ones(len(U))*U_val_max
-            results = least_squares(error_func, U, bounds=(U_min, U_max),
-                                    ftol=1.0e-3, xtol=1.0e-2)
+            # U_min = np.zeros(len(U))
+            # U_max = np.ones(len(U))*U_val_max
+            # results = least_squares(error_func, U, bounds=(U_min, U_max),
+            #                         ftol=1.0e-3, xtol=1.0e-2)
+
+            U_bound = [(0, U_val_max) for i in range(len(U))]
+            results = minimize(error_func, U, bounds=U_bound, tol=1.0e-3)
+
             if not results.success:
                 raise ValueError("U fit not converged.")
 

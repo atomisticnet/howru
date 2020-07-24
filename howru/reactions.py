@@ -148,8 +148,8 @@ class Reactions(object):
           weighted (bool): if True, multiply error by number of reactions
 
         """
-        allowed_products = self.binary_oxide
-        allowed_reactants = self.binary_oxide + self.ternary_oxide
+        allowed_products = self.binary_oxides
+        allowed_reactants = self.binary_oxides + self.ternary_oxides
         reactions = self.get_reactions(allowed_reactants,
                                        allowed_products, U)
         if fname is not None:
@@ -214,7 +214,7 @@ class Reactions(object):
                     dEr_comp, dEr_expt = reactions[r]
                     fp.write('{:4d} {:7.3f} {:7.3f} {:2d} "{}"\n'.format(
                         i, dEr_comp, dEr_expt, int(self.num_atoms(r)), str(r)))
-        self.binary_oxide_reactions = reactions
+        self.binary_o2_reactions = reactions
 
     def eval_ternary_o2_reactions(self, U, fname=None):
         """
@@ -230,7 +230,7 @@ class Reactions(object):
         O2 = [c for c in self.elements
               if c.composition == mg.Composition("O2")]
         allowed_products = self.ternary_oxides
-        allowed_reactants = self.binary_oxidess + self.ternary_oxides + O2
+        allowed_reactants = self.binary_oxides + self.ternary_oxides + O2
         reactions = self.get_reactions(allowed_reactants,
                                        allowed_products, U,
                                        required_compounds=O2)
@@ -326,34 +326,3 @@ class Reactions(object):
         self.dimer_binding_energies, _ = self.eval_formation_energies(
             self.dimers, U, elements=self.atoms,
             metal_corrections=metal_corrections, fname=fname)
-
-    def eval_reaction_errors(self, weighted=False):
-        """
-        Evaluate the reaction energy errors of all currently stored
-        reactions.
-
-        """
-        if self.binary_oxide_reactions is not None:
-            w = len(self.binary_oxide_reactions) if weighted else 1
-            self.binary_oxide_reaction_err = self.calc_errors(
-                self.binary_oxide_reactions)*w
-        if self.ternary_oxide_reactions is not None:
-            w = len(self.ternary_oxide_reactions) if weighted else 1
-            self.ternary_oxide_reaction_err = self.calc_errors(
-                self.ternary_oxide_reactions)*w
-        if self.binary_o2_reactions is not None:
-            w = len(self.binary_o2_reactions) if weighted else 1
-            self.binary_o2_reaction_err = self.calc_errors(
-                self.binary_o2_reactions)*w
-        if self.ternary_o2_reactions is not None:
-            w = len(self.ternary_o2_reactions) if weighted else 1
-            self.ternary_o2_reaction_err = self.calc_errors(
-                self.ternary_o2_reactions)*w
-        if self.binary_oxide_formations is not None:
-            w = len(self.binary_oxide_formations) if weighted else 1
-            self.binary_oxide_formation_err = self.calc_errors(
-                self.binary_oxide_formations)*w
-        if self.ternary_oxide_Formations is not None:
-            w = len(self.ternary_oxide_formations) if weighted else 1
-            self.ternary_oxide_formation_err = self.calc_errors(
-                self.ternary_oxide_formations)*w
