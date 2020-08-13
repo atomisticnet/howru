@@ -5,7 +5,8 @@ Class implementing the U value optimization.
 
 import os
 import numpy as np
-from scipy.optimize import minimize, least_squares
+from scipy.optimize import least_squares
+# from scipy.optimize import minimize
 
 from .compound import read_compounds_from_csv, read_elements_from_csv
 from .reactions import Reactions
@@ -137,12 +138,16 @@ class UOptimizer(object):
         print(" U = [" + ", ".join(["{:5.2f}".format(uval).strip()
                                     for uval in U]) + "]")
 
-    def print_Jain(self, metal_corrections):
+    def print_Jain(self, metal_corrections=None):
+        if metal_corrections is not None:
+            m = metal_corrections
+        else:
+            m = self.metal_corrections
         print("      " + (len(self.TM_species)*"{:5s} "
                           ).format(*list(self.TM_species)))
         print(" c = [" + ", ".join(
             ["{:5.2f}".format(c).strip()
-             for c in metal_corrections.values()]) + "]")
+             for c in m.values()]) + "]")
 
     def eval_energy_errors(self, U, verbose=False,
                            print_iterations=False,
@@ -294,6 +299,7 @@ class UOptimizer(object):
                                             ftol=1.0e-3, xtol=1.0e-2)
                     U_opt = results.x
                     self.print_U_values(U_opt)
+                    self.print_Jain()
                     self.reactions = self.reactions_one_in[i]
                     dirname = "loocv-{}".format(comp)
                     os.mkdir(dirname)
@@ -316,6 +322,7 @@ class UOptimizer(object):
             results = least_squares(error_func, U, bounds=(U_min, U_max),
                                     ftol=1.0e-3, xtol=1.0e-2)
 
+            # Alternatively, use SciPy's minimize function:
             # U_bound = [(0, U_val_max) for i in range(len(U))]
             # results = minimize(error_func, U, bounds=U_bound, tol=1.0e-3)
 
