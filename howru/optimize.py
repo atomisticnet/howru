@@ -59,6 +59,7 @@ class UOptimizer(object):
             N = len(self.ternary_oxides)
             for i in range(N):
                 idx = [j for j in range(N) if j != i]
+                self.loocv_comp.append(self.ternary_oxides[i])
                 self.reactions_one_out.append(
                     Reactions(self.elements, self.atoms,
                               self.dimers, self.binary_oxides,
