@@ -1,0 +1,8 @@
+#    Comput. Expt.   N  Reaction
+   0  -0.072  -2.005 10 "0.5 Fe2O3 + 2.5 Li2O -> Li5FeO4"
+   1  -0.188  -1.374 10 "2.4 Li2O + 0.2 LiFe5O8 -> Li5FeO4"
+   2   0.343  -0.985 10 "2 Li2O + LiFeO2 -> Li5FeO4"
+   3   2.999   0.960 24 "6 LiFeO2 -> LiFe5O8 + Li5FeO4"
+   4   0.593  -2.751 14 "2.4 Fe2O3 + 0.2 Li5FeO4 -> LiFe5O8"
+   5  -0.401  -0.619  4 "0.4 Fe2O3 + 0.2 Li5FeO4 -> LiFeO2"
+   6  -0.500  -0.160  4 "0.1667 Li5FeO4 + 0.1667 LiFe5O8 -> LiFeO2"

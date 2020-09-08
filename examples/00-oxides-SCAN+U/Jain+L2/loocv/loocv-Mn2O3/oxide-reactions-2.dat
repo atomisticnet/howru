@@ -1,0 +1,5 @@
+#    Comput. Expt.   N  Reaction
+   0   0.207   0.394  7 "Mn3O4 -> MnO + Mn2O3"
+   1  -0.233  -0.041  5 "0.5 Mn3O4 + 0.5 MnO2 -> Mn2O3"
+   2  -0.673  -0.477  5 "MnO + MnO2 -> Mn2O3"
+   3   0.465   0.083 10 "2 Mn2O3 -> MnO2 + Mn3O4"

@@ -1,0 +1,8 @@
+#    Comput. Expt.   N  Reaction
+   0  -0.338  -1.088  5 "MnO + TiO2 -> TiMnO3"
+   1  -2.080  -2.387  5 "0.5 MnO + 0.5 MnO2 + 0.5 Ti2O3 -> TiMnO3"
+   2  -0.233  -1.340  7 "2 MnO + TiO2 -> TiMn2O4"
+   3   0.105  -0.252  7 "MnO + TiMnO3 -> TiMn2O4"
+   4  -1.640  -2.400  7 "0.5 Mn2O3 + MnO + 0.5 Ti2O3 -> TiMn2O4"
+   5  -1.536  -2.203  7 "0.5 Mn3O4 + 0.5 MnO + 0.5 Ti2O3 -> TiMn2O4"
+   6  -1.976  -2.639  7 "1.5 MnO + 0.5 MnO2 + 0.5 Ti2O3 -> TiMn2O4"

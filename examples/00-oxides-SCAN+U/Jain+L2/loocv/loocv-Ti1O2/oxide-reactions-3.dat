@@ -1,0 +1,8 @@
+#    Comput. Expt.   N  Reaction
+   0  -0.169  -1.021  5 "CoO + TiO2 -> TiCoO3"
+   1  -1.145  -1.689  5 "0.3333 Co3O4 + 0.3333 Ti2O3 + 0.3333 TiO2 -> TiCoO3"
+   2  -0.341  -1.088  5 "MnO + TiO2 -> TiMnO3"
+   3  -0.224  -0.418  5 "0.5 TiO2 + 0.5 TiMn2O4 -> TiMnO3"
+   4  -1.225  -1.664  5 "0.3333 Mn3O4 + 0.3333 Ti2O3 + 0.3333 TiO2 -> TiMnO3"
+   5   0.019  -1.084  5 "NiO + TiO2 -> TiNiO3"
+   6  -0.234  -1.340  7 "2 MnO + TiO2 -> TiMn2O4"

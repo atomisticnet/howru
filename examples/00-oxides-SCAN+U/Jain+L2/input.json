@@ -1,0 +1,22 @@
+{
+    "species":  ["Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn"],
+    "u_values": [0.00, 1.13, 1.85, 0.00, 3.44, 3.08, 2.64, 0.68, 0.00, 0.00],
+    "jain_corrections": [0.00, -0.25, 0.09, -1.09, 0.78, 0.93, 0.48, -0.38, -0.17, 0.06],
+    "ternary_oxides": "../ternary-oxides-SCAN+rvv10-energies.csv",
+    "binary_oxides": "../binary-oxides-SCAN+rvv10-energies.csv",
+    "elements": "../elements-SCAN+rvv10-energies.csv",
+    "dimers": "../TM-O_Dimers_Dimers_no-zero.csv",
+    "atoms": "../TM-O_Dimers_Atoms.csv",
+    "optimize_binary_oxides": true,
+    "optimize_ternary_oxides": true,
+    "optimize_binary_o2_reactions": true,
+    "optimize_ternary_o2_reactions": true,
+    "optimize_binary_formation_reactions": true,
+    "optimize_ternary_formation_reactions": true,
+    "optimize_dimer_binding": false,
+    "optimize_jain_correction": true,
+    "iterative_jain_correction_fit": true,
+    "l2_regularization": 0.01,
+    "leave_one_out_cv": true,
+    "verbose": false
+}

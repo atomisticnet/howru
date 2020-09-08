@@ -1,0 +1,625 @@
+Initial Jain correction:
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.25, 0.09, -1.09, 0.78, 0.93, 0.48, -0.38, -0.17, 0.06]
+
+Initial U values:
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 1.13, 1.85, 0.00, 3.44, 3.08, 2.64, 0.68, 0.00, 0.00]
+
+>>>> LOO-CV Composition: Al2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.91, 0.00, 4.06, 2.90, 3.46, 0.66, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.13, -1.09, 1.01, 0.85, 0.74, -0.38, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1774  0.1774
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1522  0.1522
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ca1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.97, 2.88, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1754  0.1754
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Co3O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 4.01, 2.87, 2.59, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 1.00, 0.84, 0.46, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1333  0.1326
+Binary O2 reactions (RMSE & MAE)              :  0.0650  0.0650
+Ternary O2 reactions (RMSE & MAE)             :  0.1175  0.1175
+Binary oxide formation energies (RMSE & MAE)  :  0.0375  0.0375
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Co1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.23, 1.92, 0.00, 3.98, 2.95, 3.66, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.14, -1.09, 0.99, 0.88, 0.80, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1762  0.1760
+Binary O2 reactions (RMSE & MAE)              :  0.0369  0.0369
+Ternary O2 reactions (RMSE & MAE)             :  0.0895  0.0892
+Binary oxide formation energies (RMSE & MAE)  :  0.0182  0.0182
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.32, 1.92, 0.00, 3.98, 2.88, 3.53, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.71, 0.14, -1.09, 0.99, 0.84, 0.76, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1867  0.1833
+Binary O2 reactions (RMSE & MAE)              :  0.1212  0.1212
+Ternary O2 reactions (RMSE & MAE)             :  0.1285  0.1285
+Binary oxide formation energies (RMSE & MAE)  :  0.0648  0.0648
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr3O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.30, 1.92, 0.00, 3.97, 2.83, 3.48, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.72, 0.14, -1.09, 0.98, 0.83, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0993  0.0987
+Binary O2 reactions (RMSE & MAE)              :  0.1212  0.1212
+Ternary O2 reactions (RMSE & MAE)             :  0.0941  0.0861
+Binary oxide formation energies (RMSE & MAE)  :  0.0605  0.0605
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr1O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.12, -1.09, 1.01, 0.85, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cu2O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.22, 1.93, 0.00, 4.05, 2.74, 3.47, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.14, -1.09, 1.01, 0.79, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1510  0.1474
+Binary O2 reactions (RMSE & MAE)              :  0.2208  0.2208
+Ternary O2 reactions (RMSE & MAE)             :  0.0781  0.0625
+Binary oxide formation energies (RMSE & MAE)  :  0.1060  0.1060
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cu1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.93, 0.00, 4.05, 2.75, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.14, -1.09, 1.01, 0.79, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1433  0.1382
+Binary O2 reactions (RMSE & MAE)              :  0.2208  0.2208
+Ternary O2 reactions (RMSE & MAE)             :  0.1051  0.1051
+Binary oxide formation energies (RMSE & MAE)  :  0.1413  0.1413
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.2972  0.2972
+
+>>>> LOO-CV Composition: Fe2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.35, 1.96, 0.00, 3.99, 3.09, 3.51, 0.63, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.69, 0.15, -1.09, 0.99, 0.93, 0.75, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0711  0.0711
+Ternary oxide reactions (RMSE & MAE)          :  0.1904  0.1789
+Binary O2 reactions (RMSE & MAE)              :  0.2451  0.2355
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1797  0.1797
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Fe3O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.20, 1.91, 0.00, 4.04, 2.59, 3.49, 0.62, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.78, 0.13, -1.09, 1.01, 0.72, 0.75, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0710  0.0710
+Ternary oxide reactions (RMSE & MAE)          :  0.1079  0.1074
+Binary O2 reactions (RMSE & MAE)              :  0.1477  0.1470
+Ternary O2 reactions (RMSE & MAE)             :  0.1051  0.0948
+Binary oxide formation energies (RMSE & MAE)  :  0.0093  0.0093
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Fe1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.23, 1.95, 0.00, 3.98, 3.97, 3.55, 0.63, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.15, -1.09, 0.98, 1.30, 0.76, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0713  0.0713
+Ternary oxide reactions (RMSE & MAE)          :  0.0836  0.0822
+Binary O2 reactions (RMSE & MAE)              :  0.2656  0.2521
+Ternary O2 reactions (RMSE & MAE)             :  0.0762  0.0643
+Binary oxide formation energies (RMSE & MAE)  :  0.1739  0.1739
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.3451  0.3451
+
+>>>> LOO-CV Composition: K2O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.98, 2.89, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1463  0.1463
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Li2O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.15, 1.91, 0.00, 4.03, 2.86, 3.55, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.81, 0.13, -1.09, 1.00, 0.84, 0.76, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1668  0.1487
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0965  0.0806
+Binary oxide formation energies (RMSE & MAE)  :  0.1140  0.1140
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Mg1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.97, 2.88, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1661  0.1661
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Mn2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.18, 1.88, 0.00, 3.97, 2.85, 3.46, 0.58, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.79, 0.11, -1.09, 0.98, 0.83, 0.74, -0.41, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0360  0.0356
+Ternary oxide reactions (RMSE & MAE)          :  0.0900  0.0887
+Binary O2 reactions (RMSE & MAE)              :  0.0352  0.0343
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0260  0.0260
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Mn3O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.91, 0.00, 3.91, 2.87, 3.45, 0.59, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.13, -1.09, 0.96, 0.84, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0268  0.0209
+Ternary oxide reactions (RMSE & MAE)          :  0.0806  0.0795
+Binary O2 reactions (RMSE & MAE)              :  0.0212  0.0169
+Ternary O2 reactions (RMSE & MAE)             :  0.0595  0.0595
+Binary oxide formation energies (RMSE & MAE)  :  0.0082  0.0082
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Mn1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.40, 1.99, 0.00, 3.93, 2.92, 3.51, 0.63, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.66, 0.18, -1.09, 0.97, 0.86, 0.75, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0236  0.0170
+Ternary oxide reactions (RMSE & MAE)          :  0.1094  0.1027
+Binary O2 reactions (RMSE & MAE)              :  0.0197  0.0178
+Ternary O2 reactions (RMSE & MAE)             :  0.0843  0.0828
+Binary oxide formation energies (RMSE & MAE)  :  0.0013  0.0013
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.4624  0.4624
+
+>>>> LOO-CV Composition: Mn1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.53, 1.92, 0.00, 4.40, 2.89, 3.55, 0.64, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.59, 0.13, -1.09, 1.14, 0.85, 0.77, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0322  0.0263
+Ternary oxide reactions (RMSE & MAE)          :  0.0509  0.0432
+Binary O2 reactions (RMSE & MAE)              :  0.0782  0.0774
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0662  0.0662
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Na2O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.98, 2.89, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1467  0.1467
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ni1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.92, 0.00, 4.00, 2.99, 3.52, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.75, 0.14, -1.09, 0.99, 0.89, 0.76, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.2097  0.2085
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.1380  0.1379
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ni1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.12, -1.09, 1.01, 0.85, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Si1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.97, 2.88, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1658  0.1658
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Sn1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 1.91, 0.00, 3.98, 2.89, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.13, -1.09, 0.98, 0.85, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.1591  0.1591
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.94, 1.96, 0.00, 3.80, 2.96, 3.09, 0.66, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.36, 0.16, -1.09, 0.92, 0.88, 0.62, -0.38, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1005  0.0968
+Binary O2 reactions (RMSE & MAE)              :  0.1195  0.1195
+Ternary O2 reactions (RMSE & MAE)             :  0.1007  0.0918
+Binary oxide formation energies (RMSE & MAE)  :  0.0588  0.0588
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.12, -1.09, 1.01, 0.85, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.3119  0.3119
+
+>>>> LOO-CV Composition: Ti1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.26, 1.92, 0.00, 3.97, 2.94, 3.36, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.74, 0.14, -1.09, 0.98, 0.87, 0.71, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1444  0.1334
+Binary O2 reactions (RMSE & MAE)              :  0.1438  0.1438
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0848  0.0848
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: V2O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.24, 2.09, 0.00, 4.01, 2.82, 3.45, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.23, -1.09, 1.00, 0.82, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0544  0.0495
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0538  0.0494
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0472  0.0472
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: V2O5 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.23, 1.99, 0.00, 3.93, 2.84, 3.41, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.17, -1.09, 0.97, 0.83, 0.72, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0433  0.0351
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0272  0.0228
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0143  0.0143
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: V1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.22, 1.88, 0.00, 3.93, 2.82, 3.40, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.11, -1.09, 0.97, 0.82, 0.72, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0496  0.0421
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0698  0.0679
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0589  0.0589
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0772  0.0772
+
+>>>> LOO-CV Composition: V1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.23, 1.80, 0.00, 4.05, 2.84, 3.44, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.76, 0.07, -1.09, 1.01, 0.83, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0298  0.0217
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0392  0.0341
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0170  0.0170
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Zn1O1 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.13, -1.09, 1.01, 0.85, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Al2Ni1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.17, 1.91, 0.00, 4.00, 2.96, 3.49, 1.10, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.80, 0.13, -1.09, 0.99, 0.88, 0.75, -0.25, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1858  0.1858
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0771  0.0771
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr2Co1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.26, 1.91, 0.00, 3.98, 2.97, 3.32, 0.62, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.74, 0.13, -1.09, 0.99, 0.88, 0.69, -0.39, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1462  0.1395
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0968  0.0968
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1366  0.1366
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr2Fe1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.19, 1.90, 0.00, 4.06, 2.64, 3.47, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.78, 0.12, -1.09, 1.02, 0.75, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1184  0.1171
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0506  0.0506
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1324  0.1324
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr2Ni1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.15, 1.91, 0.00, 4.02, 3.02, 3.54, 0.52, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.81, 0.13, -1.09, 1.00, 0.90, 0.76, -0.42, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.2289  0.2289
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.1423  0.1423
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1826  0.1826
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Cr2Cu1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.13, 1.91, 0.00, 4.07, 2.98, 3.51, 0.59, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.82, 0.13, -1.09, 1.02, 0.89, 0.75, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1916  0.1916
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0989  0.0919
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1050  0.1050
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Fe1Cu1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.19, 1.90, 0.00, 4.06, 2.63, 3.47, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.79, 0.12, -1.09, 1.01, 0.74, 0.74, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1410  0.1375
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0571  0.0417
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1149  0.1149
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Li5Fe1O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.13, 1.91, 0.00, 4.09, 3.31, 3.60, 0.61, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.82, 0.13, -1.09, 1.03, 1.02, 0.78, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1432  0.1297
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0972  0.0865
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0618  0.0618
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Li1Fe5O8 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.16, 1.91, 0.00, 4.01, 2.49, 3.54, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.80, 0.13, -1.09, 1.00, 0.68, 0.76, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1757  0.1462
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0889  0.0730
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1177  0.1177
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Li1Fe1O2 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.13, 1.91, 0.00, 4.09, 3.11, 3.55, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.82, 0.13, -1.09, 1.03, 0.94, 0.77, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1250  0.1092
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0629  0.0520
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0015  0.0015
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Mn1Fe2O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.12, -1.09, 1.01, 0.85, 0.73, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0000  0.0000
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0000  0.0000
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.0000  0.0000
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti1Co1O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.14, 1.92, 0.00, 4.01, 3.01, 2.84, 0.54, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.81, 0.13, -1.09, 1.00, 0.90, 0.54, -0.42, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.1535  0.1522
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0934  0.0929
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1279  0.1279
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti1Mn1O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.27, 1.91, 0.00, 3.89, 3.00, 3.53, 0.59, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.74, 0.13, -1.09, 0.95, 0.89, 0.76, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0781  0.0695
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0510  0.0430
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1007  0.1007
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti1Ni1O3 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.47, 1.91, 0.00, 4.02, 3.01, 3.63, 0.59, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.63, 0.13, -1.09, 1.00, 0.90, 0.79, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.2218  0.2218
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.1400  0.1400
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1735  0.1735
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+>>>> LOO-CV Composition: Ti1Mn2O4 <<<<
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 3.90, 3.00, 3.51, 0.59, 0.00, 0.00]
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ c = [0.00, -0.77, 0.12, -1.09, 0.95, 0.89, 0.75, -0.40, -0.17, 0.06]
+Binary oxide reactions (RMSE & MAE)           :  0.0000  0.0000
+Ternary oxide reactions (RMSE & MAE)          :  0.0896  0.0793
+Binary O2 reactions (RMSE & MAE)              :  0.0000  0.0000
+Ternary O2 reactions (RMSE & MAE)             :  0.0677  0.0503
+Binary oxide formation energies (RMSE & MAE)  :  0.0000  0.0000
+Ternary oxide formation energies (RMSE & MAE) :  0.1237  0.1237
+Dimer binding energies (RMSE & MAE)           :  0.0000  0.0000
+
+Optimized U values:
+      Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ U = [0.00, 0.21, 1.90, 0.00, 4.05, 2.90, 3.45, 0.60, 0.00, 0.00]
+
+Errors with initial Jain correction:
+Binary oxide reactions (RMSE & MAE)           :  0.0406  0.0330
+Ternary oxide reactions (RMSE & MAE)          :  0.1469  0.1351
+Binary O2 reactions (RMSE & MAE)              :  0.1146  0.0853
+Ternary O2 reactions (RMSE & MAE)             :  0.0933  0.0799
+Binary oxide formation energies (RMSE & MAE)  :  0.1027  0.0828
+Ternary oxide formation energies (RMSE & MAE) :  0.1257  0.1157
+Dimer binding energies (RMSE & MAE)           :  0.4001  0.3450
+
+Errors with optimized Jain correction:
+  Sc    Ti    V     Cr    Mn    Fe    Co    Ni    Cu    Zn    
+ [0.00, -0.25, 0.09, -1.09, 0.78, 0.93, 0.48, -0.38, -0.17, 0.06]
+Binary oxide formation energies (RMSE & MAE)  :  0.1027  0.0828
+Ternary oxide formation energies (RMSE & MAE) :  0.1257  0.1157
+Dimer binding energies (RMSE & MAE)           :  0.4001  0.3450

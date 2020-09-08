@@ -1,0 +1,9 @@
+#    Comput. Expt.   N  Reaction
+   0  -3.534  -3.599  7 "0.6667 Cr3O4 + FeO + 0.1667 O2 -> Cr2FeO4"
+   1  -2.176  -1.980  4 "0.5 Cu2O + FeO + 0.25 O2 -> FeCuO2"
+   2  -2.115  -3.260 10 "FeO + 2.5 Li2O + 0.25 O2 -> Li5FeO4"
+   3 -10.048  -9.428 14 "5 FeO + 0.5 Li2O + 1.25 O2 -> LiFe5O8"
+   4  -9.625  -8.776 14 "4.8 FeO + 0.2 Li5FeO4 + 1.2 O2 -> LiFe5O8"
+   5  -7.459  -7.153 14 "4 FeO + LiFeO2 + O2 -> LiFe5O8"
+   6  -2.589  -2.275  4 "FeO + 0.5 Li2O + 0.25 O2 -> LiFeO2"
+   7  -2.166  -1.623  4 "0.8 FeO + 0.2 Li5FeO4 + 0.2 O2 -> LiFeO2"
