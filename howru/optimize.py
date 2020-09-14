@@ -271,7 +271,7 @@ class UOptimizer(object):
                     opt_binary_oxide_formations,
                     opt_ternary_oxide_formations,
                     opt_dimer_binding_energies]):
-            return U
+            return np.array(U)
         else:
             def error_func(U):
                 return self.eval_energy_errors(
