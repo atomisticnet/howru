@@ -6,7 +6,6 @@ Class implementing the U value optimization.
 import os
 import numpy as np
 from scipy.optimize import least_squares
-# from scipy.optimize import minimize
 
 from .compound import read_compounds_from_csv, read_elements_from_csv
 from .reactions import Reactions
@@ -224,16 +223,15 @@ class UOptimizer(object):
         if verbose:
             self.print_errors()
 
-        error = 0.0
-        for e in self.errors:
-            # sum of RMSEs
-            error += self.errors[e][0]
+        # loss function to achieve similar errors for all targets
+        rmse = [e[0] for e in self.errors.values()]
+        loss = np.sum(rmse) + np.std(rmse)
 
         if l2reg is not None:
             norm = np.linalg.norm(U)
             if metal_corrections is not None:
                 norm += np.linalg.norm(list(metal_corrections.values()))
-            error += l2reg*norm
+            loss += l2reg*norm
 
         if print_iterations:
             counter[0] += 1
@@ -242,12 +240,12 @@ class UOptimizer(object):
                       + (len(U)*"{:4.2f} ").format(*U)
                       + (len(U)*"{:4.2f} ").format(
                           *list(self.metal_corrections.values()))
-                      + ": {}".format(error))
+                      + ": {} {} {}".format(loss, np.sum(rmse), np.std(rmse)))
             else:
                 print("{:4d} : ".format(counter[0])
                       + (len(U)*"{:4.2f} ").format(*U)
-                      + ": {}".format(error))
-        return error
+                      + ": {}".format(loss))
+        return loss
 
     def optimize_U(self, U, U_val_max, metal_corrections=None,
                    metal_corrections_fit=False,
@@ -297,7 +295,7 @@ class UOptimizer(object):
                     self.reactions = self.reactions_one_out[i]
                     results = least_squares(error_func, U,
                                             bounds=(U_min, U_max),
-                                            ftol=1.0e-3, xtol=1.0e-2)
+                                            ftol=1.0e-4, xtol=1.0e-2)
                     U_opt = results.x
                     self.print_U_values(U_opt)
                     self.print_Jain()
@@ -322,10 +320,6 @@ class UOptimizer(object):
 
             results = least_squares(error_func, U, bounds=(U_min, U_max),
                                     ftol=1.0e-3, xtol=1.0e-2)
-
-            # Alternatively, use SciPy's minimize function:
-            # U_bound = [(0, U_val_max) for i in range(len(U))]
-            # results = minimize(error_func, U, bounds=U_bound, tol=1.0e-3)
 
             if not results.success:
                 raise ValueError("U fit not converged.")

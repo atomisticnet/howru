@@ -68,7 +68,7 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
         metal_corrections=metal_corrections)
 
     if Jain_correction:
-        optimizer.fit_metal_corrections(U)
+        optimizer.fit_metal_corrections(U_opt)
         print()
         print("Errors with optimized Jain correction:")
         print("  " + (len(TM_species)*"{:5s} ").format(*list(TM_species)))
@@ -76,7 +76,7 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                                 for c in optimizer.metal_corrections.values()
                                 ]) + "]")
         optimizer.eval_energy_errors(
-            U, verbose=True,
+            U_opt, verbose=True,
             binary_oxide_reactions=False,
             ternary_oxide_reactions=False,
             binary_o2_reactions=False,
@@ -84,7 +84,7 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
             fname_binary_oxide_formations="formation-energies-2-jain.dat",
             fname_ternary_oxide_formations="formation-energies-3-jain.dat",
             fname_dimer_binding_energies="dimer-energies-jain.dat",
-            metal_corrections=metal_corrections)
+            metal_corrections=optimizer.metal_corrections)
 
 
 def main():
