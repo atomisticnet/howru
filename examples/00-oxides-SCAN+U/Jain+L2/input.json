@@ -1,7 +1,7 @@
 {
     "species":  ["Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn"],
-    "u_values": [0.00, 1.13, 1.85, 0.00, 3.44, 3.08, 2.64, 0.68, 0.00, 0.00],
-    "jain_corrections": [0.00, -0.25, 0.09, -1.09, 0.78, 0.93, 0.48, -0.38, -0.17, 0.06],
+    "u_values": [0.00, 0.10, 0.10, 0.10, 1.10, 1.10, 1.10, 1.10, 0.00, 0.00],
+    "jain_corrections": [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
     "ternary_oxides": "../ternary-oxides-SCAN+rvv10-energies.csv",
     "binary_oxides": "../binary-oxides-SCAN+rvv10-energies.csv",
     "elements": "../elements-SCAN+rvv10-energies.csv",

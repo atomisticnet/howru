@@ -1,2 +1,10 @@
 #    Comput. Expt.   N  Reaction
-   0   0.018  -1.323  7 "Cr2O3 + CuO -> Cr2CuO4"
+   0   0.291   0.038  7 "Cr2O3 + CuO -> Cr2CuO4"
+   1  -0.784  -0.427  7 "0.5 Cr2O3 + CrO2 + 0.5 Cu2O -> Cr2CuO4"
+   2  -1.630  -0.816  7 "0.25 Cr3O4 + 1.25 CrO2 + 0.5 Cu2O -> Cr2CuO4"
+   3  -1.402  -0.741  7 "0.5 Cr3O4 + 0.5 CrO2 + CuO -> Cr2CuO4"
+   4  -8.087  -4.119 42 "Cr2O3 + Cr3O4 + 7 CrO2 + 3 Cu2O -> 6 Cr2CuO4"
+   5  -0.837  -0.481  7 "0.3333 Cr2O3 + 0.3333 Cr3O4 + 0.3333 CrO2 + CuO -> Cr2CuO4"
+   6  -0.354  -0.241  7 "0.7 Cr2O3 + 0.6 CrO2 + 0.3 Cu2O + 0.4 CuO -> Cr2CuO4"
+   7  -1.493  -0.771  7 "0.4 Cr3O4 + 0.8 CrO2 + 0.2 Cu2O + 0.6 CuO -> Cr2CuO4"
+   8  -0.813  -0.457  7 "0.4091 Cr2O3 + 0.1818 Cr3O4 + 0.6364 CrO2 + 0.2273 Cu2O + 0.5455 CuO -> Cr2CuO4"

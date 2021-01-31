@@ -1,1 +1,8 @@
 #    Comput. Expt.   N  Reaction
+   0  -0.339  -0.057  8 "Ti3O5 -> TiO2 + Ti2O3"
+   1  -0.922  -0.593  5 "TiO + TiO2 -> Ti2O3"
+   2  -2.182  -1.243 15 "Ti3O5 + 2 TiO + TiO2 -> 3 Ti2O3"
+   3  -0.583  -0.536  8 "TiO + 2 TiO2 -> Ti3O5"
+   4  -0.245  -0.479 16 "Ti2O3 + TiO + 3 TiO2 -> 2 Ti3O5"
+   5   0.583   0.536  8 "Ti3O5 -> 2 TiO2 + TiO"
+   6   1.505   1.129 13 "Ti2O3 + Ti3O5 -> 3 TiO2 + 2 TiO"
