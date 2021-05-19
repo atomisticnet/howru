@@ -6,6 +6,7 @@ Class implementing the U value optimization.
 import os
 import numpy as np
 from scipy.optimize import least_squares
+import pymatgen as mg
 
 from .compound import read_compounds_from_csv, read_elements_from_csv
 from .reactions import Reactions
@@ -16,60 +17,169 @@ __version__ = "0.1"
 
 class UOptimizer(object):
 
-    def __init__(self, TM_species, elements_csv, atoms_csv, dimers_csv,
-                 binary_oxides_csv, ternary_oxides_csv, loocv=False):
+    def __init__(self, TM_species, elements_csv, binary_oxides_csv,
+                 ternary_oxides_csv, loocv=False):
+
+        def has_E_expt(compounds):
+            return [c for c in compounds
+                    if not np.isnan(c.expt_formation_energy_RT)]
 
         self.TM_species = TM_species
-        self.elements = read_elements_from_csv(elements_csv, TM_species)
-        self.atoms = read_elements_from_csv(atoms_csv, TM_species)
-        self.dimers = read_compounds_from_csv(dimers_csv, TM_species)
-        self.binary_oxides = read_compounds_from_csv(
-            binary_oxides_csv, TM_species)
-        self.ternary_oxides = read_compounds_from_csv(
-            ternary_oxides_csv, TM_species)
+        self.elements = has_E_expt(read_elements_from_csv(
+            elements_csv, TM_species))
+        self.binary_oxides = has_E_expt(read_compounds_from_csv(
+            binary_oxides_csv, TM_species))
+        self.ternary_oxides = has_E_expt(read_compounds_from_csv(
+            ternary_oxides_csv, TM_species))
+
+        self.all_compounds = list(set(self.elements + self.binary_oxides
+                                      + self.ternary_oxides))
 
         self.U = np.zeros(len(self.TM_species))
+
         self.metal_corrections = None
 
-        self.reactions = Reactions(self.elements, self.atoms,
-                                   self.dimers, self.binary_oxides,
-                                   self.ternary_oxides)
+        self.reactions = self._get_reactions(self.elements,
+                                             self.binary_oxides,
+                                             self.ternary_oxides)
+
+        self.reaction_weight = None
 
         self.loocv = loocv
         if loocv:
-            self.reactions_one_out = []
-            self.reactions_one_in = []
-            self.loocv_comp = []
-            self.all_reactions = self.reactions
-            N = len(self.binary_oxides)
-            for i in range(N):
-                idx = [j for j in range(N) if j != i]
-                self.loocv_comp.append(self.binary_oxides[i])
-                self.reactions_one_out.append(
-                    Reactions(self.elements, self.atoms,
-                              self.dimers,
-                              [self.binary_oxides[j] for j in idx],
-                              self.ternary_oxides))
-                self.reactions_one_in.append(
-                    Reactions(self.elements, self.atoms,
-                              self.dimers, self.binary_oxides,
-                              self.ternary_oxides,
-                              required_compounds=[self.loocv_comp[-1]]))
-            N = len(self.ternary_oxides)
-            for i in range(N):
-                idx = [j for j in range(N) if j != i]
-                self.loocv_comp.append(self.ternary_oxides[i])
-                self.reactions_one_out.append(
-                    Reactions(self.elements, self.atoms,
-                              self.dimers, self.binary_oxides,
-                              [self.ternary_oxides[j] for j in idx]))
-                self.reactions_one_in.append(
-                    Reactions(self.elements, self.atoms,
-                              self.dimers, self.binary_oxides,
-                              self.ternary_oxides,
-                              required_compounds=[self.ternary_oxides[i]]))
+            self._loocv_reactions_setup()
+        else:
+            self.reactions_one_out = None
+            self.reactions_one_in = None
+            self.loocv_comp = None
+            self.all_reactions = None
 
         self.errors = {}
+
+    def _get_reactions(self, elements, binary_oxides, ternary_oxides,
+                       required_compounds=None):
+        reactions = {}
+        reactions['Binary oxide reactions'] = Reactions(
+            reactants=(binary_oxides + ternary_oxides),
+            products=binary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds)
+        reactions['Ternary oxide reactions'] = Reactions(
+            reactants=(binary_oxides + ternary_oxides),
+            products=ternary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds)
+        reactions['Binary oxide formation energies'] = Reactions(
+            reactants=elements,
+            products=binary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds,
+            metal_correction_species=self.TM_species)
+        reactions['Ternary oxide formation energies'] = Reactions(
+            reactants=elements,
+            products=ternary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds,
+            metal_correction_species=self.TM_species)
+        O2 = [c for c in self.elements
+              if c.composition == mg.Composition("O2")]
+        if required_compounds is not None:
+            required_compounds = required_compounds + O2
+        else:
+            required_compounds = O2
+        reactions['Binary O2 reactions'] = Reactions(
+            reactants=(binary_oxides + ternary_oxides + O2),
+            products=binary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds)
+        reactions['Ternary O2 reactions'] = Reactions(
+            reactants=(binary_oxides + ternary_oxides + O2),
+            products=ternary_oxides,
+            required_compounds=required_compounds,
+            all_compounds=self.all_compounds)
+        return reactions
+
+    def _loocv_reactions_setup(self):
+        self.reactions_one_out = []
+        self.reactions_one_in = []
+        self.loocv_comp = []
+        self.all_reactions = self.reactions
+        N = len(self.binary_oxides)
+        for i in range(N):
+            comp = self.binary_oxides[i]
+            one_out = {}
+            one_in = {}
+            for kind in self.reactions:
+                one_out[kind] = (
+                    self.reactions[kind].remove_compound(comp))
+                one_in[kind] = (
+                    self.reactions[kind].require_compound(comp))
+            self.loocv_comp.append(comp)
+            self.reactions_one_out.append(one_out)
+            self.reactions_one_in.append(one_in)
+        N = len(self.ternary_oxides)
+        for i in range(N):
+            comp = self.ternary_oxides[i]
+            one_out = {}
+            one_in = {}
+            for kind in self.reactions:
+                one_out[kind] = (
+                    self.reactions[kind].remove_compound(comp))
+                one_in[kind] = (
+                    self.reactions[kind].require_compound(comp))
+            self.loocv_comp.append(comp)
+            self.reactions_one_out.append(one_out)
+            self.reactions_one_in.append(one_in)
+
+    def reaction_matrix(self):
+        """
+        Return matrix representation of all all reactions.
+
+        """
+
+        reaction_types = [
+            'Binary oxide reactions',
+            'Ternary oxide reactions',
+            'Binary O2 reactions',
+            'Ternary O2 reactions',
+            'Binary oxide formation energies',
+            'Ternary oxide formation energies']
+
+        reaction_matrix = []
+        energies_expt = []
+        reactions = []
+        num_atoms = []
+
+        for kind in reaction_types:
+            reaction_matrix.extend(
+                self.reactions[kind].reaction_matrix.tolist())
+            energies_expt.extend(
+                self.reactions[kind].reaction_energies_expt.tolist())
+            reactions.extend(self.reactions[kind].reactions)
+            num_atoms.extend(self.reactions[kind].num_atoms)
+
+        return (np.array(reaction_matrix),
+                np.array(energies_expt), reactions, num_atoms)
+
+    def compound_energies(self, U, Jain=None):
+        """
+        Return the predicted energies of all compounds.
+
+        """
+
+        if Jain is None:
+            Jain = [0.0 for M in self.TM_species]
+        elif Jain == 'auto':
+            self.fit_metal_corrections(U)
+            Jain = [self.metal_corrections[M] for M in self.TM_species]
+
+        # select formation energies so that the Jain correction is
+        # available
+        compound_energies = (
+            self.reactions['Binary oxide formation energies'].energy_comp(
+                U, Jain=Jain))
+
+        return compound_energies
 
     def fit_metal_corrections(self, U):
         """
@@ -80,14 +190,22 @@ class UOptimizer(object):
           U (list): list of U values
 
         """
+        r = self.reactions['Binary oxide formation energies']
+        formation_reactions = r.reactions
+        formation_energies_expt = r.reaction_energies_expt
+        formation_energies_calc = r.reaction_energies_comp(
+            U, Jain=[0 for u in U])
+
         metal_corrections = {}
         for M in self.TM_species:
-            M_oxides = [c for c in self.binary_oxides if M in c.composition]
-            if len(M_oxides) == 0:
+            idx = np.where([mg.Composition(M) in r.all_comp
+                            for r in formation_reactions])[0]
+            if len(idx) == 0:
                 metal_corrections[M] = 0.0
             else:
-                _, (comp, Ef_expt, Ef_calc
-                    ) = self.reactions.eval_formation_energies(M_oxides, U)
+                comp = [formation_reactions[i].products[0] for i in idx]
+                Ef_expt = np.array([formation_energies_expt[i] for i in idx])
+                Ef_calc = np.array([formation_energies_calc[i] for i in idx])
                 num_atoms = np.array([c.num_atoms for c in comp])
                 M_content = np.array([c[M] for c in comp])/num_atoms
                 errors = (Ef_expt - Ef_calc)/num_atoms
@@ -99,33 +217,6 @@ class UOptimizer(object):
                 else:
                     metal_corrections[M] = -errors[0]/M_content[0]
         self.metal_corrections = metal_corrections
-
-    def calc_errors(self, reactions, weighted=False):
-        """
-        Calculate reaction energy errors.
-
-        Arguments:
-          reactions (dict): Reaction dictionary returned by
-            reactions.Reactions.get_reactions()
-          weighted (bool): If True, multiply errors by number of reactions
-
-        Returns:
-          np.array([rmse, mae])
-
-        """
-        if len(reactions) == 0:
-            return np.array([0.0, 0.0])
-        rmse = 0.0
-        mae = 0.0
-        for r in reactions:
-            dEr_comp, dEr_expt = reactions[r]
-            error = (dEr_expt - dEr_comp)/self.reactions.num_atoms(r)
-            mae += abs(error)
-            rmse += error*error
-        mae /= len(reactions)
-        rmse = np.sqrt(rmse/len(reactions))
-        w = len(reactions) if weighted else 1
-        return np.array([w*rmse, w*mae])
 
     def print_errors(self):
         for e in self.errors:
@@ -143,11 +234,15 @@ class UOptimizer(object):
             m = metal_corrections
         else:
             m = self.metal_corrections
+        if m is None:
+            Jain = [0.0 for M in self.TM_species]
+        else:
+            Jain = m.values()
         print("      " + (len(self.TM_species)*"{:5s} "
                           ).format(*list(self.TM_species)))
         print(" c = [" + ", ".join(
             ["{:5.2f}".format(c).strip()
-             for c in m.values()]) + "]")
+             for c in Jain]) + "]")
 
     def eval_energy_errors(self, U, verbose=False,
                            print_iterations=False,
@@ -157,14 +252,12 @@ class UOptimizer(object):
                            ternary_o2_reactions=True,
                            binary_oxide_formations=True,
                            ternary_oxide_formations=True,
-                           dimer_binding_energies=True,
                            fname_binary_oxide_reactions=None,
                            fname_ternary_oxide_reactions=None,
                            fname_binary_o2_reactions=None,
                            fname_ternary_o2_reactions=None,
                            fname_binary_oxide_formations=None,
                            fname_ternary_oxide_formations=None,
-                           fname_dimer_binding_energies=None,
                            metal_corrections=None,
                            metal_corrections_fit=False, weighted=False,
                            l2reg=None, counter=[0]):
@@ -174,63 +267,88 @@ class UOptimizer(object):
         if metal_corrections_fit:
             self.fit_metal_corrections(U)
 
+        if self.metal_corrections is not None:
+            Jain = [self.metal_corrections[M] for M in self.TM_species]
+        else:
+            Jain = [0.0 for M in self.TM_species]
+
         self.errors = {}
         if binary_oxide_reactions:
-            self.reactions.eval_binary_oxide_reactions(
-                U, fname=fname_binary_oxide_reactions)
-            self.errors['Binary oxide reactions'] = (
-                self.calc_errors(self.reactions.binary_oxide_reactions,
-                                 weighted=weighted))
+            s = 'Binary oxide reactions'
+            fname = fname_binary_oxide_reactions
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_reactions(U, fname)
+
         if ternary_oxide_reactions:
-            self.reactions.eval_ternary_oxide_reactions(
-                U, fname=fname_ternary_oxide_reactions)
-            self.errors['Ternary oxide reactions'] = (
-                self.calc_errors(self.reactions.ternary_oxide_reactions,
-                                 weighted=weighted))
+            s = 'Ternary oxide reactions'
+            fname = fname_ternary_oxide_reactions
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_reactions(U, fname)
+
         if binary_o2_reactions:
-            self.reactions.eval_binary_o2_reactions(
-                U, fname=fname_binary_o2_reactions)
-            self.errors['Binary O2 reactions'] = (
-                self.calc_errors(self.reactions.binary_o2_reactions,
-                                 weighted=weighted))
+            s = 'Binary O2 reactions'
+            fname = fname_binary_o2_reactions
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_reactions(U, fname)
+
         if ternary_o2_reactions:
-            self.reactions.eval_ternary_o2_reactions(
-                U, fname=fname_ternary_o2_reactions)
-            self.errors['Ternary O2 reactions'] = (
-                self.calc_errors(self.reactions.ternary_o2_reactions,
-                                 weighted=weighted))
+            s = 'Ternary O2 reactions'
+            fname = fname_ternary_o2_reactions
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_reactions(U, fname)
+
         if binary_oxide_formations:
-            self.reactions.eval_binary_oxide_formations(
-                U, metal_corrections=self.metal_corrections,
-                fname=fname_binary_oxide_formations)
-            self.errors['Binary oxide formation energies'] = (
-                self.calc_errors(self.reactions.binary_oxide_formations,
-                                 weighted=weighted))
+            s = 'Binary oxide formation energies'
+            fname = fname_binary_oxide_formations
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, Jain=Jain, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_formation_energies(
+                    U, fname, Jain=Jain)
+
         if ternary_oxide_formations:
-            self.reactions.eval_ternary_oxide_formations(
-                U, metal_corrections=self.metal_corrections,
-                fname=fname_ternary_oxide_formations)
-            self.errors['Ternary oxide formation energies'] = (
-                self.calc_errors(self.reactions.ternary_oxide_formations,
-                                 weighted=weighted))
-        if dimer_binding_energies:
-            self.reactions.eval_dimer_binding_energies(
-                U, metal_corrections=self.metal_corrections,
-                fname=fname_dimer_binding_energies)
-            self.errors['Dimer binding energies'] = (
-                self.calc_errors(self.reactions.dimer_binding_energies,
-                                 weighted=weighted))
+            s = 'Ternary oxide formation energies'
+            fname = fname_ternary_oxide_formations
+            self.errors[s] = self.reactions[s].reaction_energy_rmse_mae(
+                U, Jain=Jain, weighted=weighted)
+            if fname is not None:
+                self.reactions[s].print_formation_energies(
+                    U, fname, Jain=Jain)
+
         if verbose:
             self.print_errors()
 
         # loss function to achieve similar errors for all targets
-        rmse = [e[0] for e in self.errors.values()]
-        loss = np.sum(rmse) + np.std(rmse)
+        # rmse = [e[0] for e in self.errors.values()]
+        # loss = np.sum(rmse) + np.std(rmse)
+
+        rmse = 0.0
+        N_tot = 0
+        for kind in self.reactions:
+            N = len(self.reactions[kind].reactions)
+            rmse += N*self.errors[kind][0]**2
+            N_tot += N
+        rmse = np.sqrt(rmse/N_tot)
+        loss = rmse
+
+        # R, dE_exp, reactions, num_atoms = self.reaction_matrix()
+        # E_comp = self.compound_energies(U, Jain=Jain)
+        # err = (R.dot(E_comp) - dE_exp)/num_atoms
+        # rmse2 = np.sqrt(np.mean(err**2))
+        # print("CHECK: ", rmse, rmse2)
 
         if l2reg is not None:
             norm = np.linalg.norm(U)
-            if metal_corrections is not None:
-                norm += np.linalg.norm(list(metal_corrections.values()))
+            # if metal_corrections is not None:
+            #     norm += np.linalg.norm(list(metal_corrections.values()))
             loss += l2reg*norm
 
         if print_iterations:
@@ -255,10 +373,12 @@ class UOptimizer(object):
                    opt_binary_o2_reactions=False,
                    opt_ternary_o2_reactions=False,
                    opt_binary_oxide_formations=False,
-                   opt_ternary_oxide_formations=False,
-                   opt_dimer_binding_energies=False):
+                   opt_ternary_oxide_formations=False):
         """
         Least squares optimization of the U values.
+
+        Returns:
+          U_opt (list): optimized U values
 
         """
 
@@ -267,8 +387,7 @@ class UOptimizer(object):
                     opt_binary_o2_reactions,
                     opt_ternary_o2_reactions,
                     opt_binary_oxide_formations,
-                    opt_ternary_oxide_formations,
-                    opt_dimer_binding_energies]):
+                    opt_ternary_oxide_formations]):
             return np.array(U)
         else:
             def error_func(U):
@@ -282,8 +401,7 @@ class UOptimizer(object):
                     binary_o2_reactions=opt_binary_o2_reactions,
                     ternary_o2_reactions=opt_ternary_o2_reactions,
                     binary_oxide_formations=opt_binary_oxide_formations,
-                    ternary_oxide_formations=opt_ternary_oxide_formations,
-                    dimer_binding_energies=opt_dimer_binding_energies)
+                    ternary_oxide_formations=opt_ternary_oxide_formations)
 
             U_min = np.zeros(len(U))
             U_max = np.ones(len(U))*U_val_max
@@ -295,7 +413,7 @@ class UOptimizer(object):
                     self.reactions = self.reactions_one_out[i]
                     results = least_squares(error_func, U,
                                             bounds=(U_min, U_max),
-                                            ftol=1.0e-4, xtol=1.0e-2)
+                                            ftol=1.0e-4, xtol=1.0e-3)
                     U_opt = results.x
                     self.print_U_values(U_opt)
                     self.print_Jain()
@@ -319,7 +437,7 @@ class UOptimizer(object):
                 self.reactions = self.all_reactions
 
             results = least_squares(error_func, U, bounds=(U_min, U_max),
-                                    ftol=1.0e-3, xtol=1.0e-2)
+                                    ftol=1.0e-4, xtol=1.0e-3)
 
             if not results.success:
                 raise ValueError("U fit not converged.")

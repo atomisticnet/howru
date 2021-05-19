@@ -18,19 +18,16 @@ __version__ = "0.1"
 
 
 def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
-                      atoms_csv, dimers_csv, binary_oxides_csv,
-                      ternary_oxides_csv, opt_oxides_2, opt_oxides_3,
-                      opt_o2_2, opt_o2_3, opt_formation_2,
-                      opt_formation_3, opt_dimer, verbose,
-                      U_val_max=10.0, Jain_correction=False,
-                      iterative_Jain_fit=False, l2reg=None,
-                      loocv=False):
+                      binary_oxides_csv, ternary_oxides_csv,
+                      opt_oxides_2, opt_oxides_3, opt_o2_2, opt_o2_3,
+                      opt_formation_2, opt_formation_3,
+                      verbose, U_val_max=10.0, Jain_correction=False,
+                      iterative_Jain_fit=False, l2reg=None, loocv=False):
 
     if iterative_Jain_fit:
         Jain_correction = True
 
-    optimizer = UOptimizer(TM_species, elements_csv, atoms_csv,
-                           dimers_csv, binary_oxides_csv,
+    optimizer = UOptimizer(TM_species, elements_csv, binary_oxides_csv,
                            ternary_oxides_csv, loocv=loocv)
 
     print("Initial Jain correction:")
@@ -47,8 +44,7 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
                                  opt_binary_o2_reactions=opt_o2_2,
                                  opt_ternary_o2_reactions=opt_o2_3,
                                  opt_binary_oxide_formations=opt_formation_2,
-                                 opt_ternary_oxide_formations=opt_formation_3,
-                                 opt_dimer_binding_energies=opt_dimer)
+                                 opt_ternary_oxide_formations=opt_formation_3)
 
     if any(U_opt != U):
         print("\nOptimized U values:")
@@ -57,14 +53,13 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
     print()
     print("Errors with initial Jain correction:")
     optimizer.eval_energy_errors(
-        U, verbose=True,
+        U_opt, verbose=True,
         fname_binary_oxide_reactions="oxide-reactions-2.dat",
         fname_ternary_oxide_reactions="oxide-reactions-3.dat",
         fname_binary_o2_reactions="O2-reactions-2.dat",
         fname_ternary_o2_reactions="O2-reactions-3.dat",
         fname_binary_oxide_formations="formation-energies-2.dat",
         fname_ternary_oxide_formations="formation-energies-3.dat",
-        fname_dimer_binding_energies="dimer-energies.dat",
         metal_corrections=metal_corrections)
 
     if Jain_correction:
@@ -83,7 +78,6 @@ def optimize_U_values(U, TM_species, metal_corrections, elements_csv,
             ternary_o2_reactions=False,
             fname_binary_oxide_formations="formation-energies-2-jain.dat",
             fname_ternary_oxide_formations="formation-energies-3-jain.dat",
-            fname_dimer_binding_energies="dimer-energies-jain.dat",
             metal_corrections=optimizer.metal_corrections)
 
 
@@ -116,8 +110,6 @@ def main():
         TM_species,
         metal_corrections,
         options["elements"],
-        options["atoms"],
-        options["dimers"],
         options["binary_oxides"],
         options["ternary_oxides"],
         options["optimize_binary_oxides"],
@@ -126,7 +118,6 @@ def main():
         options["optimize_ternary_o2_reactions"],
         options["optimize_binary_formation_reactions"],
         options["optimize_ternary_formation_reactions"],
-        options["optimize_dimer_binding"],
         options["verbose"],
         Jain_correction=options["optimize_jain_correction"],
         iterative_Jain_fit=options["iterative_jain_correction_fit"],
