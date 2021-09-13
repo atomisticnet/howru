@@ -1,8 +1,0 @@
-#    Comput. Expt.   N  Reaction
-   0  -1.803  -1.188  7 "0.3333 Co3O4 + 0.6667 Cr3O4 -> Cr2CoO4"
-   1  -0.358  -0.567  7 "CoO + Cr2O3 -> Cr2CoO4"
-   2  -2.050  -1.346  7 "CoO + 0.5 Cr3O4 + 0.5 CrO2 -> Cr2CoO4"
-   3  -1.489  -1.053  7 "0.2609 Co3O4 + 0.2174 CoO + 0.2174 Cr2O3 + 0.5217 Cr3O4 -> Cr2CoO4"
-   4  -1.842  -1.213  7 "0.28 Co3O4 + 0.16 CoO + 0.64 Cr3O4 + 0.08 CrO2 -> Cr2CoO4"
-   5  -1.486  -1.086  7 "CoO + 0.3333 Cr2O3 + 0.3333 Cr3O4 + 0.3333 CrO2 -> Cr2CoO4"
-   6  -9.866  -6.822 42 "Co3O4 + 3 CoO + Cr2O3 + 3 Cr3O4 + CrO2 -> 6 Cr2CoO4"

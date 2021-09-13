@@ -1,6 +1,0 @@
-#    Comput. Expt.   N  Reaction
-   0  -0.001  -0.053  7 "Al2O3 + NiO -> Al2NiO4"
-   1   0.382   0.038  7 "Cr2O3 + NiO -> Cr2NiO4"
-   2  -1.310  -0.742  7 "0.5 Cr3O4 + 0.5 CrO2 + NiO -> Cr2NiO4"
-   3  -0.746  -0.482  7 "0.3333 Cr2O3 + 0.3333 Cr3O4 + 0.3333 CrO2 + NiO -> Cr2NiO4"
-   4   0.071  -0.191  5 "NiO + TiO2 -> TiNiO3"
