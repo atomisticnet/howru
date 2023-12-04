@@ -82,7 +82,7 @@ class UOptimizer(object):
             all_compounds=self.all_compounds,
             metal_correction_species=self.TM_species)
         O2 = [c for c in self.elements
-              if c.composition == mg.Composition("O2")]
+              if c.composition == mg.core.Composition("O2")]
         if required_compounds is not None:
             required_compounds = required_compounds + O2
         else:
@@ -198,7 +198,7 @@ class UOptimizer(object):
 
         metal_corrections = {}
         for M in self.TM_species:
-            idx = np.where([mg.Composition(M) in r.all_comp
+            idx = np.where([mg.core.Composition(M) in r.all_comp
                             for r in formation_reactions])[0]
             if len(idx) == 0:
                 metal_corrections[M] = 0.0

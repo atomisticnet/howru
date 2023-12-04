@@ -18,7 +18,7 @@ __version__ = "0.1"
 class Compound(object):
     def __init__(self, formula, data, TM_species):
         TM_species = np.array(TM_species)
-        self.composition, nFU = mg.Composition(
+        self.composition, nFU = mg.core.Composition(
             formula).get_reduced_composition_and_factor()
         idx = ['U({})'.format(s) for s in TM_species]
         U_values = data[idx]
