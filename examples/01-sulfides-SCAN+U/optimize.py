@@ -6,10 +6,10 @@ Class implementing the U value optimization.
 import os
 import numpy as np
 from scipy.optimize import least_squares
-import pymatgen as mg
+import pymatgen.core as mg
 
-from .compound import read_compounds_from_csv, read_elements_from_csv
-from .reactions import Reactions
+from compound import read_compounds_from_csv, read_elements_from_csv
+from reactions import Reactions
 
 __date__ = "2020-07-23"
 __version__ = "0.1"
@@ -82,7 +82,7 @@ class UOptimizer(object):
             all_compounds=self.all_compounds,
             metal_correction_species=self.TM_species)
         O2 = [c for c in self.elements
-              if c.composition == mg.core.Composition("O2")]
+              if c.composition == mg.Composition("O2")]
         if required_compounds is not None:
             required_compounds = required_compounds + O2
         else:
@@ -198,9 +198,9 @@ class UOptimizer(object):
 
         metal_corrections = {}
         for M in self.TM_species:
-            idx = np.where([mg.core.Composition(M) in r.all_comp
+            idx = np.where([mg.Composition(M) in r.all_comp
                             for r in formation_reactions])[0]
-            if len(idx) == 0:
+            if len(idx) == -1:
                 metal_corrections[M] = 0.0
             else:
                 comp = [formation_reactions[i].products[0] for i in idx]

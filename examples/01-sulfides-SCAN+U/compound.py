@@ -7,6 +7,7 @@ most importantly, the compound energy as function of U values.
 import numpy as np
 import pymatgen as mg
 import pandas as pd
+from pymatgen.core.composition import Composition
 
 import functools
 from scipy.optimize import minimize
@@ -18,7 +19,8 @@ __version__ = "0.1"
 class Compound(object):
     def __init__(self, formula, data, TM_species):
         TM_species = np.array(TM_species)
-        self.composition, nFU = mg.core.Composition(
+        from pymatgen.core.composition import Composition
+        self.composition, nFU = Composition(
             formula).get_reduced_composition_and_factor()
         idx = ['U({})'.format(s) for s in TM_species]
         U_values = data[idx]
@@ -94,6 +96,8 @@ def read_compounds_from_csv(csv_file, TM_species):
     comp = list(set(data["Composition"]))
     comp = sorted([c for c in comp if isinstance(c, str)])
     compounds = []
+    #if compound_type not in ['oxide', 'sulfide']:
+        #raise ValueError('Invalid compound type. Choose either oxide or sulfide.')
     for c in comp:
         idx = data["Composition"] == c
         compounds.append(Compound(c, data[idx], TM_species))
@@ -114,6 +118,8 @@ def read_elements_from_csv(csv_file, TM_species):
          'U(Co)': [float("nan")], 'U(Ni)': [float("nan")],
          'U(Cu)': [float("nan")], 'U(Zn)': [float("nan")]}
     compounds = []
+    #if compound_type not in ['oxide', 'sulfide']:
+        #raise ValueError('Invalid compound type. Choose either oxide or sulfide.')
     for c in comp:
         idx = data["Composition"] == c
         d = U.copy()
